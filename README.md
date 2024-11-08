@@ -1,7 +1,7 @@
-Here's a simple `README.md` based on your request:
+
 
 ```markdown
-# Chatbot Application
+### Chatbot Application
 
 This is a chatbot application that integrates RAG with OpenAI's GPT-4 model on custom data, built using Streamlit. Follow the instructions below to set up and run the application on your local machine.
 
