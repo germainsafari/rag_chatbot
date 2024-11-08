@@ -11,6 +11,7 @@ st.set_page_config(
 )
 
 # Custom CSS for styling
+# Custom CSS for dark mode
 st.markdown("""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
@@ -18,12 +19,18 @@ st.markdown("""
         * {
             font-family: 'Roboto', sans-serif;
         }
-        
-        /* Main container styling */
+
+        /* Main container styling with padding and centering */
         .main {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 2rem; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+
+        /* Apply padding to the body */
+        .css-1y4p8pa {
+            padding-left: 2rem !important;
+            padding-right: 2rem !important;
         }
         
         /* Header and navigation styling */
@@ -32,8 +39,8 @@ st.markdown("""
             justify-content: space-between;
             align-items: center;
             padding: 1rem 2rem;
-            background-color: white;
-            border-bottom: 1px solid #eee;
+            background-color: #1e1e1e; /* Dark background */
+            border-bottom: 1px solid #444; /* Darker border */
         }
         
         /* Centered greeting and question styling */
@@ -42,17 +49,15 @@ st.markdown("""
             font-size: 48px;
             font-weight: 700;
             margin-top: 4rem;
-            color: #1a1a1a;
-            font-family: 'Roboto', sans-serif;
+            color: #ffffff; /* White text for dark mode */
         }
         
         .subheading {
             text-align: center;
             font-size: 32px;
             font-weight: 300;
-            color: #666;
+            color: #bbbbbb; /* Light grey for contrast */
             margin-top: 1rem;
-            font-family: 'Roboto', sans-serif;
         }
         
         .guidelines-link {
@@ -75,19 +80,18 @@ st.markdown("""
         }
         
         .quick-prompt {
-            background-color: #F8F9FA;
-            border: 1px solid #E9ECEF;
+            background-color: #333333; /* Dark grey for quick prompts */
+            border: 1px solid #555555; /* Dark border */
             border-radius: 12px;
             padding: 1.5rem;
             cursor: pointer;
             transition: all 0.2s ease;
             text-align: left;
-            color: #1a1a1a;
-            font-family: 'Roboto', sans-serif;
+            color: #ffffff; /* White text */
         }
         
         .quick-prompt:hover {
-            background-color: #F1F3F5;
+            background-color: #444444; /* Slightly lighter on hover */
             transform: translateY(-2px);
         }
         
@@ -95,22 +99,22 @@ st.markdown("""
         .chat-container {
             margin-top: 2rem;
             border-radius: 12px;
-            background-color: white;
+            background-color: #1e1e1e; /* Dark background for chat */
         }
         
         .chat-message {
             padding: 1.5rem;
             border-radius: 12px;
             margin-bottom: 1rem;
-            font-family: 'Roboto', sans-serif;
+            color: #ffffff; /* White text */
         }
         
         .chat-message.user {
-            background-color: #F8F9FA;
+            background-color: #333333; /* User message background */
         }
         
         .chat-message.assistant {
-            background-color: #F8F9FA;
+            background-color: #444444; /* Assistant message background */
         }
         
         /* Input box styling */
@@ -119,19 +123,20 @@ st.markdown("""
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: white;
+            background-color: #1e1e1e; /* Dark input background */
             padding: 1rem 2rem;
-            border-top: 1px solid #eee;
+            border-top: 1px solid #444444; /* Darker border */
         }
         
         .stTextInput>div>div>textarea {
             border-radius: 12px;
             padding: 1rem;
-            border: 1px solid #E9ECEF;
+            border: 1px solid #555555; /* Dark border */
             font-family: 'Roboto', sans-serif;
             font-size: 16px;
             resize: none;
-            background-color: #F8F9FA;
+            background-color: #333333; /* Dark background for input */
+            color: #ffffff; /* White text */
         }
         
         .stTextInput>div>div>textarea:focus {
@@ -143,13 +148,13 @@ st.markdown("""
         .footer {
             text-align: center;
             padding: 1rem;
-            color: #666;
+            color: #bbbbbb; /* Light grey text */
             font-size: 14px;
-            font-family: 'Roboto', sans-serif;
             margin-top: 2rem;
         }
     </style>
 """, unsafe_allow_html=True)
+
 
 # Initialize session state for messages if not exists
 if "messages" not in st.session_state:
