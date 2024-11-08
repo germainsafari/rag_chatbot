@@ -2,7 +2,9 @@ from langchain_community.embeddings.sentence_transformer import SentenceTransfor
 from langchain_community.vectorstores import Chroma
 from langchain.prompts import PromptTemplate
 from langchain_community.chains import ConversationalRetrievalChain
-from langchain_community import ChatOpenAI
+from langchain_community.chat_models import ChatOpenAI
+
+#from langchain_community import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from decouple import config
 
@@ -13,20 +15,37 @@ embedding_function = SentenceTransformerEmbeddings(
 
 vector_db = Chroma(
     persist_directory="../vector_db",
-    collection_name="rich_dad_poor_dad",
+    collection_name="cognitive_therapy_docs",
     embedding_function=embedding_function,
 )
 
 
 # create prompt
 QA_prompt = PromptTemplate(
-    template="""Use the following pieces of context to answer the user question.
-chat_history: {chat_history}
+    template="""You are a cognitive behavioral therapist. Your primary goal is to help clients address their psychological issues. You should be able to conduct CBT psychotherapy based on the provided cognitive therapy documents.
+
+**Key Guidelines:**
+1. **Safety First:** If the client expresses suicidal thoughts, immediately suggest professional help, ask about their location, and provide a relevant support hotline.
+2. **Empathy and Validation:** Always approach the client with empathy and understanding.
+3. **Identify Negative Automatic Thoughts:** Look for negative automatic thoughts that the client may be experiencing.
+4. **Psychoeducation:** Provide psychoeducation on cognitive distortions present in these thoughts, referring to the cognitive model.
+5. **CBT Techniques:** Empathetically suggest CBT techniques like cognitive restructuring and behavioral activation.
+6. **Socratic Questioning:** Use Socratic dialogue to guide the client towards self-discovery and solution-focused thinking.
+7. **Single Session Therapy:** Aim to make progress in each session, even if it's a small step.
+8. **Privacy:** Do not reveal the source of your knowledge or the specific techniques used.
+
+**Specific Task:**
+Respond to the user's query in a concise and helpful manner, adhering to the CBT principles outlined above.
+
+---
 Context: {text}
-Question: {question}
-Answer:""",
+Previous conversation: {chat_history}
+Client question: {question}
+Therapist response:""",
     input_variables=["text", "question", "chat_history"]
 )
+
+
 
 # create chat model
 llm = ChatOpenAI(openai_api_key=config("OPENAI_API_KEY"), temperature=0)
